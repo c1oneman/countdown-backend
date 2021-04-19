@@ -11,7 +11,7 @@ app.enable("trust proxy");
 const speedLimiter = slowDown({
   windowMs: 1 * 60 * 1000, // 15 minutes
   delayAfter: 50, // allow 100 requests per 15 minutes, then...
-  delayMs: 500
+  delayMs: 500,
 });
 app.use(speedLimiter);
 
