@@ -3,8 +3,17 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 var morgan = require("morgan");
 var dotenv = require("dotenv").config();
+const slowDown = require("express-slow-down";
 
 const app = express();
+
+app.enable("trust proxy");
+const speedLimiter = slowDown({
+  windowMs: 1 * 60 * 1000, // 15 minutes
+  delayAfter: 50, // allow 100 requests per 15 minutes, then...
+  delayMs: 500
+});
+app.use(speedLimiter);
 
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
