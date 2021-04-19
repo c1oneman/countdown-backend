@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 var morgan = require("morgan");
 var dotenv = require("dotenv").config();
-const slowDown = require("express-slow-down";
+const slowDown = require("express-slow-down");
 
 const app = express();
 
