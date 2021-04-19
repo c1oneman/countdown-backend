@@ -7,6 +7,7 @@ const slowDown = require("express-slow-down");
 
 const app = express();
 
+// Global rate limiter
 app.enable("trust proxy");
 const speedLimiter = slowDown({
   windowMs: 1 * 60 * 1000, // 15 minutes
@@ -15,10 +16,12 @@ const speedLimiter = slowDown({
 });
 app.use(speedLimiter);
 
+// Logger
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
+// Cors
 app.use(cors());
 
 // parse requests of content-type - application/json
@@ -43,7 +46,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to timer application." });
+  res.json({ message: "Welcome to almostcl.one API" });
 });
 
 require("./app/routes/timer.routes")(app);
