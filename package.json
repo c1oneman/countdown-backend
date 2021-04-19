@@ -1,0 +1,29 @@
+{
+  "name": "countdown-backend",
+  "version": "1.0.0",
+  "description": "backend for the almostcl.one website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c1oneman/countdown-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/c1oneman/countdown-backend/issues"
+  },
+  "homepage": "https://github.com/c1oneman/countdown-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.4",
+    "morgan": "^1.10.0",
+    "nanoid": "^3.1.22"
+  }
+}
