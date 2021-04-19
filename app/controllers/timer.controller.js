@@ -39,6 +39,7 @@ exports.create = (req, res) => {
 // Retrieve all timers from the database.
 exports.findAll = (req, res) => {
   Timer.find()
+    .sort({ expires: "descending" })
     .then((data) => {
       res.send(data);
     })
