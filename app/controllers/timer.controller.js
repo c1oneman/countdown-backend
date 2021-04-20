@@ -38,8 +38,14 @@ exports.create = (req, res) => {
 
 // Retrieve all timers from the database.
 exports.findAll = (req, res) => {
+  const resultsPerPage = 15;
+  let page = req.params.page >= 1 ? req.params.page : 1;
+  page = page - 1;
+
   Timer.find()
-    .sort({ expires: "descending" })
+    .sort({ expires: "asc" })
+    .limit(resultsPerPage)
+    .skip(resultsPerPage * page)
     .then((data) => {
       res.send(data);
     })

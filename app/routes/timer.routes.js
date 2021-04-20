@@ -7,7 +7,7 @@ module.exports = (app) => {
   router.post("/", timers.create);
 
   // Retrieve all Timers
-  router.get("/", timers.findAll);
+  router.get("/list/:page", timers.findAll);
 
   // Retrieve a single Timer with id
   router.get("/:id", timers.findOne);
