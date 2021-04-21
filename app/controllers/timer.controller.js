@@ -16,9 +16,18 @@ exports.create = (req, res) => {
     return;
   }
 
+  let id = nanoid(6);
+  Timer.findOne({ _id: id })
+    .then((data) => {
+      if (!data) return;
+      else console.log("Found existing with id");
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
   // Create a Timer
   const timer = new Timer({
-    _id: nanoid(6),
+    _id: id,
     title: req.body.title,
     expires: req.body.expires,
   });
