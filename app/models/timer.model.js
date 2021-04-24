@@ -16,5 +16,6 @@ module.exports = (mongoose) => {
   });
 
   const Timer = mongoose.model("timers", schema);
+
   return Timer;
 };

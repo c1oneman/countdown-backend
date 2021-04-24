@@ -10,8 +10,8 @@ const app = express();
 // Global rate limiter
 app.enable("trust proxy");
 const speedLimiter = slowDown({
-  windowMs: 1 * 60 * 1000, // 2 minute
-  delayAfter: 10, // allow 100 requests per 15 minutes, then...
+  windowMs: 1 * 60 * 1000, // 1 minute
+  delayAfter: 10, // allow 10 requests per 1 minute, then...
   delayMs: 500,
 });
 app.use(speedLimiter);
