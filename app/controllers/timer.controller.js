@@ -40,7 +40,7 @@ exports.create = (req, res) => {
 
 // Retrieve all timers from the database.
 exports.findAll = (req, res) => {
-  const resultsPerPage = 15;
+  const resultsPerPage = 10;
   let page = req.params.page >= 1 ? req.params.page : 1;
   page = page - 1;
 
