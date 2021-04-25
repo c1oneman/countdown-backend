@@ -7,16 +7,23 @@ const Timer = db.timers;
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.title) {
-    res.status(400).send({ message: "Content can not be empty!" });
+    res.status(400).send({ message: "Content can not be empty." });
     return;
   }
 
   if (!req.body.expires) {
-    res.status(400).send({ message: "Expires can not be empty!" });
+    res.status(400).send({ message: "Expires can not be empty." });
+    return;
+  }
+  let url = req.body.url;
+  if (url.length > 12) {
+    res.status(400).send({ message: "Custom URL is too long. (max 12 chars)" });
     return;
   }
 
-  const id = nanoid(6);
+  url = encodeURIComponent(url);
+
+  let id = url ? url : nanoid(6);
 
   // Create a Timer
   const timer = new Timer({
@@ -38,18 +45,23 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all timers from the database.
-exports.findAll = (req, res) => {
+// Retrieve all timers from the database. (paginate)
+exports.findAll = async (req, res) => {
   const resultsPerPage = 10;
   let page = req.params.page >= 1 ? req.params.page : 1;
   page = page - 1;
+  const total = await Timer.find().count((err, count) => {
+    return count;
+  });
+
+  const maxPages = Math.ceil(total / resultsPerPage);
 
   Timer.find()
     .sort({ expires: "asc" })
     .limit(resultsPerPage)
     .skip(resultsPerPage * page)
     .then((data) => {
-      res.send(data);
+      res.send({ total, resultsPerPage, maxPages, data });
     })
     .catch((err) => {
       res.status(500).send({
