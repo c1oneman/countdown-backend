@@ -16,9 +16,13 @@ exports.create = (req, res) => {
     return;
   }
   let url = req.body.url;
-  if (url.length > 12) {
-    res.status(400).send({ message: "Custom URL is too long. (max 12 chars)" });
-    return;
+  if (req.body.url) {
+    if (url.length > 12) {
+      res
+        .status(400)
+        .send({ message: "Custom URL is too long. (max 12 chars)" });
+      return;
+    }
   }
 
   url = encodeURIComponent(url);
