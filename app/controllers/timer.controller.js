@@ -27,7 +27,7 @@ exports.create = (req, res) => {
 
   url = encodeURIComponent(url);
 
-  let id = url ? url : nanoid(6);
+  let id = url !== "undefined" ? url : nanoid(6);
 
   // Create a Timer
   const timer = new Timer({
